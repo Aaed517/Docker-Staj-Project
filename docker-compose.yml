@@ -1,0 +1,69 @@
+version: '3'
+services:
+  djangoapp:
+      restart: always
+      container_name: DjangoRestApi
+      build: .
+      environment:
+      - WAIT_HOSTS=postgres:5432
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=30
+      - WAIT_HOST_CONNECT_TIMEOUT=30
+      volumes: 
+        - .:/opt/services/djangoapp/src:z
+        - static_volume:/opt/services/djangoapp/static:z
+        - media_volume:/opt/services/djangoapp/media:z
+      networks:
+        - nginx_network
+        - databasepostgresql_network
+      command: >
+          bash -c 'python /app/staj-project/manage.py makemigrations
+          && python /app/staj-project/manage.py migrate
+          && python /opt/services/djangoapp/src/staj-project/manage.py collectstatic --no-input
+          && cd /app/staj-project
+          && gunicorn staj.wsgi:application --bind 0.0.0.0:8000'
+      depends_on:
+        - databasepostgresql
+  flaskapp:
+    container_name: FlaskRestApp
+    build: ./staj-project-flask
+    command: gunicorn -w 1 -b 0.0.0.0:5000 wsgi:app
+    networks:
+      - nginx_network
+  nginx:
+    restart: always
+    container_name: NginxService
+    build: ./nginx-docker
+    ports:
+      - "8000:80"
+      - "5000:5000"
+    volumes: 
+      - static_volume:/opt/services/djangoapp/static:z
+      - media_volume:/opt/services/djangoapp/media:z
+    depends_on:
+      - djangoapp
+      - flaskapp
+    networks:
+      - nginx_network
+  databasepostgresql:
+    restart: always
+    container_name: PostgresqlService
+    image: postgres:10
+    environment:
+      POSTGRES_DB: onur
+      POSTGRES_USER: databasepostgresql_user
+      POSTGRES_PASSWORD: databasepostgresql_password
+    volumes: 
+      - database_volume:/var/lib/postgresql/data:z
+    networks:
+      - databasepostgresql_network
+networks:
+  nginx_network:
+    driver: bridge
+  databasepostgresql_network:
+    driver: bridge  
+volumes:
+  static_volume:
+  media_volume:
+  database_volume:
+
