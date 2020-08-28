@@ -10,7 +10,7 @@ class Libary(models.Model):
     eklenme_tarihi = models.DateTimeField(editable=False)
     güncellenme_tarihi = models.DateTimeField(editable=False)
     slug = models.SlugField(unique=True, max_length=50, editable=False)
-    resim = models.ImageField(upload_to='libary')
+    resim = models.ImageField(upload_to='libary', null=True)
 
     def __str__(self):
         return self.ismi + " " + self.adres
