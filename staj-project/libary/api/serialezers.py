@@ -11,6 +11,7 @@ class LibarySerializer(serializers.ModelSerializer):
     class Meta:
         model = Libary
         fields = [
+            'id',
             'ismi',
             'adres',
             'telefon',
