@@ -41,6 +41,6 @@ class LibaryUpdateAPIView(RetrieveUpdateAPIView):
 class LibaryCreateAPIView(CreateAPIView):
     queryset = Libary.objects.all()
     serializer_class = LibarySerializer
-    permission_classes = [IsSuperUser]
+    #permission_classes = [IsSuperUser]
 
 
