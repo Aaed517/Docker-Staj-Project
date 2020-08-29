@@ -57,6 +57,13 @@ services:
       - database_volume:/var/lib/postgresql/data:z
     networks:
       - databasepostgresql_network
+  frontendreactapp:
+    container_name: FrontendREACTapp
+    build : ./react-project
+    ports:
+      - "3000:3000"
+    depends_on:
+      - djangoapp
 networks:
   nginx_network:
     driver: bridge
