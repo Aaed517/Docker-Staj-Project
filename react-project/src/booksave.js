@@ -90,14 +90,14 @@ export default class booksave extends Component {
         this.setState({visible:true,renk:'info',mesagge:'Kayıt Başarı İle Gerçekleştirilmiştir.'},()=>{
           window.setTimeout(()=>{
             this.setState({visible:false})
-          },3500)
+          },4500)
         });
       }
       onShowAlertW = ()=>{
         this.setState({visible:true,renk:'danger',mesagge:'Eksik Bilgiler Bulunmaktadır.'},()=>{
           window.setTimeout(()=>{
             this.setState({visible:false})
-          },3500)
+          },4500)
         });
       }
 
