@@ -51,6 +51,9 @@ export default class booksave extends Component {
         tip_id:0,
         todos: [],
         sayfa_sayisi:0,
+        visible:false,
+        renk:'success',
+        mesagge:'deneme',
 
 
 
@@ -83,7 +86,20 @@ export default class booksave extends Component {
         this.setState({ libary: e.target.value })
 
     }
-
+    onShowAlert = ()=>{
+        this.setState({visible:true,renk:'info',mesagge:'Kayıt Başarı İle Gerçekleştirilmiştir.'},()=>{
+          window.setTimeout(()=>{
+            this.setState({visible:false})
+          },3500)
+        });
+      }
+      onShowAlertW = ()=>{
+        this.setState({visible:true,renk:'danger',mesagge:'Eksik Bilgiler Bulunmaktadır.'},()=>{
+          window.setTimeout(()=>{
+            this.setState({visible:false})
+          },3500)
+        });
+      }
 
     postContentOne() {
         console.log(this.state.kitap_ismi)
@@ -93,7 +109,7 @@ export default class booksave extends Component {
         console.log("yazar_id",this.state.yazar)
         console.log("tür_id",this.state.tip)
         console.log("libary_id",this.state.libary)
-        try{
+        
         axios.post("http://127.0.0.1:8000/api/books/create", {
             kitap_ismi: this.state.kitap_ismi,
             aciklama: this.state.aciklama,
@@ -104,10 +120,16 @@ export default class booksave extends Component {
             ilk_yayınlanma_tarihi: "2020-08-12T13:00:00Z",
 
 
-        })}
-        catch(e){
-            console.log(e)
-        }
+        }).then(res=>{
+            if(res.status<203){
+                this.onShowAlert()
+            }
+                }     
+        ).catch(res=>{
+            this.onShowAlertW()
+
+        })
+
     }
 
 
@@ -118,8 +140,11 @@ export default class booksave extends Component {
                 <Form onSubmit={this.handleSubmit} inline>
                     <Container style={{ marginTop: 100 }}>
                         <Jumbotron style={{ width: 800 }}>
+            
                         <h3>Kitap Kayıt Formu</h3>
-
+                       <Alert  color={this.state.renk} isOpen={this.state.visible} >
+        {this.state.mesagge}
+      </Alert>
                             <Row >
                                 <Col>
                                     <FormGroup style={{ height: 100, marginLeft: "1%" }}>
