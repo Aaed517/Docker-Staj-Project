@@ -6,7 +6,7 @@ export default class booksave extends Component {
 
         try {
            /* const res = await fetch(' http://127.0.0.1:8000/api/books/Kind-Create-List') */
-             const res = await fetch(' http://http://192.168.99.100/:8000/api/books/Kind-Create-List')
+             const res = await fetch(' http://http://192.168.99.100:8000/api/books/Kind-Create-List')
             console.log(res)
             const abc = await res.json();
             const tipler = abc;
