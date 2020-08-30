@@ -6,7 +6,7 @@ export default class booksave extends Component {
 
         try {
            /* const res = await fetch(' http://127.0.0.1:8000/api/books/Kind-Create-List') */
-             const res = await fetch(' http://http://192.168.99.100:8000/api/books/Kind-Create-List')
+             const res = await fetch(' http://192.168.99.100:8000/api/books/Kind-Create-List')
             console.log(res)
             const abc = await res.json();
             const tipler = abc;
@@ -18,7 +18,7 @@ export default class booksave extends Component {
         }
         try {
            /* const resNEW = await fetch(' http://127.0.0.1:8000/api/books/Writer-Create-List') */
-            const resNEW = await fetch(' http://http://192.168.99.100:8000/api/books/Writer-Create-List') 
+            const resNEW = await fetch(' http://192.168.99.100:8000/api/books/Writer-Create-List') 
             console.log(resNEW)
             const abcD = await resNEW.json();
             const yazarlar = abcD;
@@ -32,7 +32,7 @@ export default class booksave extends Component {
 
         try {
          /*   const res = await fetch('http://127.0.0.1:8000/api/libary/list'); */
-             const res = await fetch('http://http://192.168.99.100:8000/api/libary/list'); 
+             const res = await fetch('http://192.168.99.100:8000/api/libary/list'); 
             const abc = await res.json();
             const todos = abc['results'];
             console.log(todos,'libary list_____');
