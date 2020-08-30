@@ -11,7 +11,7 @@ class App extends Component {
   async componentDidMount() {
     try {
    /*   const res = await fetch('http://127.0.0.1:8000/api/libary/list');*/
-      const res = await fetch('http://http://192.168.99.100:8000/api/libary/list');
+      const res = await fetch('http://192.168.99.100:8000/api/libary/list');
       const abc = await res.json();
       const todos = abc['results'];
       console.log(todos[0]['ismi']);
@@ -60,7 +60,7 @@ class App extends Component {
   }
   handleDelete(e) {
    /* var url = "http://127.0.0.1:8000/api/libary/delete/" + e.target.name */
-     var url = "http://http://192.168.99.100:8000/api/libary/delete/" + e.target.name
+     var url = "http://192.168.99.100:8000/api/libary/delete/" + e.target.name
     axios.delete(url)
     this.refreshPage()
   }
