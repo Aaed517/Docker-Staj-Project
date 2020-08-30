@@ -114,7 +114,7 @@ export default class booksave extends Component {
         console.log("libary_id",this.state.libary)
         
     /*    axios.post("http://127.0.0.1:8000/api/books/create", { */
-        axios.post("http://http://192.168.99.100:8000/api/books/create", { 
+        axios.post("http://192.168.99.100:8000/api/books/create", { 
             kitap_ismi: this.state.kitap_ismi,
             aciklama: this.state.aciklama,
             sayfa_sayisi: this.state.sayfa_sayisi,
