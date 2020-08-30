@@ -6,7 +6,8 @@ export default class booklibarylist extends Component {
     async componentDidMount() {
         
         try {
-            const res = await fetch('http://127.0.0.1:8000/api/books/list')
+          /*  const res = await fetch('http://127.0.0.1:8000/api/books/list') */
+             const res = await fetch('http://192.168.99.100:8000/api/books/list')
             console.log(res)
             const abc = await res.json();
             const todos = abc;
@@ -31,7 +32,8 @@ export default class booklibarylist extends Component {
     };
 
     handleDelete(e){
-        var url = "http://127.0.0.1:8000/api/books/delete/"+e.target.name
+      /*  var url = "http://127.0.0.1:8000/api/books/delete/"+e.target.name */
+         var url = "http://192.168.99.100:8000/api/books/delete/"+e.target.name
         axios.delete(url)
         this.refreshPage()
       }
