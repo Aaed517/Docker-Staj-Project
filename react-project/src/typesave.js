@@ -12,7 +12,8 @@ export default class writersave extends Component {
       }
       postContentWriter() {
           console.log(this.state.yazar)
-        axios.post("http://127.0.0.1:8000/api/books/Kind-Create-List", {
+    /*    axios.post("http://127.0.0.1:8000/api/books/Kind-Create-List", {  */
+                    axios.post("http://192.168.99.100:8000/api/books/Kind-Create-List", {
           tip: this.state.yazar,
         })
       }
